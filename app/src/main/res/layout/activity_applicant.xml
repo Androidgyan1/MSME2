@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:gravity="center"
+    android:background="@drawable/gradient_background"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ApplicantActivity">
+
+
+
+
+
+    <androidx.cardview.widget.CardView
+        app:cardElevation="18dp"
+        android:layout_margin="18dp"
+        app:cardCornerRadius="10dp"
+        app:cardBackgroundColor="@android:color/white"
+        android:layout_marginTop="6dp"
+        android:layout_width="match_parent"
+        android:layout_height="300dp">
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Mobile Number Display -->
+            <TextView
+                android:id="@+id/textViewMobileZone"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:text="Search Applicant !!"
+                android:textColor="@android:color/black"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/cardView"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"></TextView>
+
+
+            <EditText
+                android:id="@+id/edittextSearch"
+                android:layout_width="300dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:backgroundTint="#cacfd2"
+                android:drawableLeft="@drawable/loupe"
+                android:drawablePadding="10dp"
+                android:fontFamily="sans-serif-medium"
+                android:hint="Applicant ID"
+                android:inputType="phone"
+                android:textColorHint="@color/black"></EditText>
+
+
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/search"
+                android:layout_width="200dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="30dp"
+                android:layout_marginBottom="20dp"
+                android:background="@drawable/edit_text_background"
+                android:elevation="10dp"
+                android:fontFamily="sans-serif"
+                android:text="Search"
+                android:textAllCaps="false"
+                android:textColor="@android:color/white"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+
+            <ProgressBar
+                android:indeterminateTint="#fa2406"
+                android:id="@+id/progress"
+                android:visibility="gone"
+                android:layout_gravity="center"
+                android:layout_width="30dp"
+                android:layout_height="30dp"></ProgressBar>
+
+
+
+        </LinearLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+
+
+</LinearLayout>

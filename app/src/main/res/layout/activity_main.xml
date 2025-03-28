@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:background="@drawable/gradient_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+
+    <ImageView
+        android:id="@+id/header"
+        android:scaleType="fitXY"
+        android:src="@drawable/logo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ImageView>
+
+
+
+    <ImageView
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:id="@+id/odop"
+        android:layout_below="@+id/header"
+        android:src="@drawable/odop"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></ImageView>
+
+
+
+    <TextView
+        android:layout_marginTop="10dp"
+        android:textStyle="bold"
+        android:textColor="@android:color/white"
+        android:textSize="30sp"
+        android:fontFamily="@font/veraicle"
+        android:layout_centerInParent="true"
+        android:text="Directorate of Industries &amp; \nEnterprise Promotion"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"></TextView>
+
+    <ImageView
+        android:layout_alignParentBottom="true"
+        android:scaleType="fitXY"
+        android:src="@drawable/director"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ImageView>
+
+
+
+
+</RelativeLayout>
