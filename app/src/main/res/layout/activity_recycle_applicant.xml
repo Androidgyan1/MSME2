@@ -488,6 +488,7 @@
 
     <androidx.appcompat.widget.AppCompatButton
         android:layout_marginBottom="10dp"
+        android:textAllCaps="false"
         android:layout_margin="12dp"
         android:id="@+id/buttonProceed"
         android:layout_alignParentBottom="true"
@@ -496,7 +497,7 @@
         android:background="@drawable/edit_text_background"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Proceed"
+        android:text="Click for photo"
         android:layout_marginTop="10dp" />
 
 

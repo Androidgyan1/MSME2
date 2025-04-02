@@ -1,6 +1,8 @@
 package com.example.myapplication;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
@@ -9,6 +11,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.provider.MediaStore;
+import android.provider.Settings;
 import android.util.Base64;
 import android.util.Log;
 import android.widget.Button;
@@ -17,6 +20,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.AppCompatButton;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 
@@ -47,7 +51,7 @@ public class CameraActivity extends AppCompatActivity {
     // UI Components
     private ImageView photoImageView1, photoImageView2, photoImageView3;
     private TextView messageTextView;
-    private Button sendButton;
+    private AppCompatButton sendButton;
 
     // Data
     private Bitmap photo1, photo2, photo3;
@@ -60,7 +64,9 @@ public class CameraActivity extends AppCompatActivity {
     private RequestQueue requestQueue;
     private SharedPreferences sharedPreferences;
 
-    String ApplicantNO,SchemeCode1,ApplicantName;
+    String ApplicantNO,SchemeCode1,ApplicantName,androidId;
+
+    // Store ANDROID_ID in a variable
 
     String Image1 ="/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAAGAAAAhgEQAAIAAAAQAAAAjAESAAMAAAABAAEAAAEaAAUAAAABAAAAnAEbAAUAAAABAAAApAEoAAMAAAABAAIAAAExAAIAAAAcAAAArAEyAAIAAAAUAAAAyAITAAMAA";
 String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAAGAAAAhgEQAAIAAAAQAAAAjAESAAMAAAABAAEAAAEaAAUAAAABAAAAnAEbAAUAAAABAAAApAEoAAMAAAABAAIAAAExAAIAAAAcAAAArAEyAAIAAAAUAAAAyAITAAMAA";
@@ -82,6 +88,7 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
         setupClickListeners();
     }
 
+    @SuppressLint("HardwareIds")
     private void initializeServices() {
         // Initialize location client
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
@@ -104,6 +111,10 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
         /// //UserName
         SharedPreferences sharedPreferencesscehemeuserName = PreferenceManager.getDefaultSharedPreferences(this);
         ApplicantName = sharedPreferencesscehemeuserName.getString("ApplicantName", "N/A");
+
+        androidId = Settings.Secure.getString(getContentResolver(),
+                Settings.Secure.ANDROID_ID);
+        Log.d("DeviceInfo", "Android ID: " + androidId);
 
 
 
@@ -257,7 +268,7 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
             payload.put("Longitude", Double.parseDouble(longitude));
             payload.put("ApplicationNumber", ApplicantNO);
             payload.put("SchemeCode", SchemeCode1);
-            payload.put("MacAddress", "02:00:00:00:00:00");
+            payload.put("MacAddress", androidId);
             payload.put("UpdatedBy", ApplicantName);
 
             // Encode each image separately
@@ -274,10 +285,10 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
 
             Log.d("DisplayNo", ApplicantNO.toString());
             Log.d("Image1", image1Base64);
-            Log.d("Image2", image2);
+            Log.d("Image2", image2Base64);
             Log.d("Image3", image3Base64);
             Log.d("SchemeCode", SchemeCode1.toString());
-            Log.d("MAC_Address", "02:00:00:00:00:00");
+            Log.d("MAC_Address", androidId);
             Log.d("UserName", ApplicantName.toString());
 
             // Log each image separately with their first 20 characters for verification
@@ -322,6 +333,7 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
         return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
     private void sendVolleyRequest(JSONObject requestBody) {
+
         String url = "http://10.135.30.111/api/imagesPush";
         String authToken = sharedPreferences.getString("auth_token", "");
         Log.d("auth_token",authToken);
@@ -339,8 +351,11 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
                             String decryptedResponse = null;
                             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
                                 decryptedResponse = CrossPlatformEncryptDecrypt.decrypt(encryptedResponse, SECRET_KEY);
+
                             }
                             JSONObject jsonResponse = new JSONObject(decryptedResponse);
+                            Toast.makeText(CameraActivity.this,jsonResponse.toString(),Toast.LENGTH_SHORT).show();
+                            Log.d("Decripted",jsonResponse.toString());
                            // processSuccessfulResponse(jsonResponse);
                         }
                     } catch (Exception e) {
@@ -436,7 +451,6 @@ String image2 = "/9j/4AAQSkZJRgABAQEBLAEsAAD/4RNARXhpZgAATU0AKgAAAAgACgEPAAIAAAA
         }
         return Base64.encodeToString(imageBytes, Base64.NO_WRAP);
     }
-
 
 
 }

@@ -52,9 +52,9 @@
         android:layout_below="@+id/messageTextView"
         android:id="@+id/photoImageView1"
         android:layout_width="200dp"
+        android:scaleType="fitXY"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/camera"
+        android:src="@drawable/addphoto"
         android:background="#CCCCCC"
         android:clickable="true"
         android:focusable="true"/>
@@ -66,8 +66,8 @@
         android:id="@+id/photoImageView2"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/camera"
+        android:scaleType="fitXY"
+        android:src="@drawable/addphoto"
         android:background="#CCCCCC"
         android:clickable="true"
         android:focusable="true"/>
@@ -78,14 +78,15 @@
         android:id="@+id/photoImageView3"
         android:layout_width="200dp"
         android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:scaleType="fitXY"
         android:layout_marginTop="10dp"
-        android:src="@drawable/camera"
+        android:src="@drawable/addphoto"
         android:background="#CCCCCC"
         android:clickable="true"
         android:focusable="true"/>
 
-    <Button
+    <androidx.appcompat.widget.AppCompatButton
+        android:background="@drawable/sent_button_color"
         android:layout_margin="6dp"
         android:layout_alignParentBottom="true"
         android:id="@+id/sendButton"
